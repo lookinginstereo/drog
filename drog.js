@@ -61,16 +61,34 @@ var loadBlogDirectory = function(options){
     });
 };
 
+//these two functions need to be tied to the DrogEntry class
 function getDrogEntryFor(drogJson){
-    var contents = fs.readFileSync(drogJson, "UTF-8");
+    var contents = fs.readFileSync(drogJson, "utf8");
     var config = JSON.parse(contents);
     var entry = new DrogEntry();
 
     entry.root = path.dirname(drogJson);
     entry.title = config.title || "";
-    entry.content = config.text || "No Title";
+    entry.content = parseText(entry.root, config.text) || "No Title";
     entry.tags = config.tags || [];
     entry.date = new Date(config.date);
 
     return entry;
+}
+
+function parseText(root, textString){
+    var varRegEx = /#{([^}]*)}/g;
+
+    textString = textString.replace(varRegEx, function(match, group){
+        var replacementText;
+        var filePath = path.join(root, group);
+        if(fs.statSync(filePath).isFile()){
+            replacementText = fs.readFileSync(filePath);
+        }else{
+            replacementText =  "#{INVALID FILE REFERENCE}";
+        }
+        return replacementText;
+    });
+
+    return textString;
 }
