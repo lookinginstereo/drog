@@ -22,6 +22,7 @@ var DrogEntry = function(){
     this.content = "";
     this.images = [];
     this.tags = [];
+    this.date = new Date();
 };
 
 exports.DrogEntry = DrogEntry;
@@ -68,7 +69,8 @@ function getDrogEntryFor(drogJson){
     entry.root = path.dirname(drogJson);
     entry.title = config.title || "";
     entry.content = config.text || "No Title";
-    config.tags = config.tags || [];
+    entry.tags = config.tags || [];
+    entry.date = new Date(config.date);
 
     return entry;
 }

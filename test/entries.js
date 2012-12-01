@@ -25,6 +25,7 @@ describe("Drog", function(){
             testDrog[0].should.be.an.instanceof(drog.DrogEntry);
             testDrog[0].title.should.eql("Test Entry 1");
             testDrog[0].root.should.eql(path.join(simpleTest,"testEntry1"));
+            testDrog[0].date.should.equal(new Date("December 1, 2012"));
             done();
         }); 
     });
