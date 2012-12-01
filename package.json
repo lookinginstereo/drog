@@ -1,0 +1,11 @@
+{
+  "name": "drog",
+  "version": "0.0.1",
+  "private": false,
+  "main" : "drog.js",
+  "dependencies": {
+    "underscore" : "*",
+    "nodeunit" : "*",
+    "should" : "*"
+  }
+}

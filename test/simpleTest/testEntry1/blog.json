@@ -1,0 +1,7 @@
+{
+    "title" : "Test Entry 1",
+    "text" : "#{blog.md}",
+    "tags" : [
+        "foo", "bar", "baz"
+    ]
+}

@@ -1,0 +1,4 @@
+#node packages
+node_modules/
+#vim swap files
+*.sw*
