@@ -2,7 +2,7 @@
   "name": "drog",
   "version": "0.0.1",
   "private": false,
-  "main" : "drog.js",
+  "main" : "lib/drog.js",
   "dependencies": {
     "underscore" : "*",
     "nodeunit" : "*",
