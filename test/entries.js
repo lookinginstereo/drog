@@ -10,7 +10,7 @@ var simpleTest = path.join(__dirname, 'simpleTest'),
 
 describe("Drog", function(){
     var testDrog;
-    beforeEach(function(done){
+    before(function(done){
         testDrog = new drog.Drog({
             root : simpleTest,
             success : function(){
