@@ -49,13 +49,17 @@ describe("Drog", function(){
 
         it("should refelct updated entries", function(done){
             var destDir = path.join(simpleTest, "newEntry");
-            wrench.copyDirRecursive(newEntryTest, destDir, function(err){
-                console.log(err);
+            wrench.copyDirRecursive(newEntryTest, destDir, function(){
                 testDrog.entries(function(entries){
                     entries.length.should.equal(2);
                     done();
                 });
             });
         });
+
+        it("should return entries in correct date order", function(){
+            var entries = testDrog.entries();
+            (entries[0].date - entries[1].date).should.be.above(0)
+        })
     });
 });
