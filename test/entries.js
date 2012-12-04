@@ -40,10 +40,10 @@ describe("Drog", function(){
             entries[0].date.should.equal(new Date("December 1, 2012"));
         });
 
-        it("should read the file loading variables properly", function(){
+        it("should read the markdown file and interpret it properly", function(){
             var entries = testDrog.entries();
             entries[0].content.should.eql(
-            "This is a test blog, it doesn's actually say anything\n" 
+            "<p>This is a test blog, it doesn's actually say anything</p>" 
             );
         });
 
