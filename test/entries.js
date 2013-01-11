@@ -57,9 +57,9 @@ describe("Drog", function(){
             });
         });
 
-        it("should return entries in correct date order", function(){
+        it("should return entries in newest first date order", function(){
             var entries = testDrog.entries();
             (entries[0].date - entries[1].date).should.be.above(0)
-        })
+        });
     });
 });
