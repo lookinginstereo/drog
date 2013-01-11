@@ -6,7 +6,8 @@ var assert = require("assert"),
 
 var simpleTest = path.join(__dirname, 'simpleTest'),
     testFiles = path.join(__dirname, 'testFiles'),
-    newEntryTest = path.join(testFiles, 'newEntry');
+    newEntryTest = path.join(testFiles, 'newEntry'),
+    unpublishedTest = path.join(testFiles, 'unpublishedEntry');
 
 describe("Drog", function(){
     var testDrog;
@@ -14,6 +15,7 @@ describe("Drog", function(){
         testDrog = new drog.Drog({
             root : simpleTest,
             success : function(){
+                console.log("created drog on dir " + simpleTest); 
                 done();
             },
             failure : done
@@ -21,8 +23,10 @@ describe("Drog", function(){
     });
     after(function(){
         //clean up new entry
-        var updateTestDir = path.join(simpleTest, "newEntry");
+        var updateTestDir = path.join(simpleTest, "newEntry"),
+            unpublishedDir = path.join(simpleTest, "unpublishedEntry");
         wrench.rmdirSyncRecursive(updateTestDir);
+        wrench.rmdirSyncRecursive(unpublishedDir);
     });
     describe("#entries()", function(){
         it("should return a list of entries", function(done){
@@ -61,5 +65,15 @@ describe("Drog", function(){
             var entries = testDrog.entries();
             (entries[0].date - entries[1].date).should.be.above(0)
         });
+
+        it("should not contain entries that are marked with publish as false", function(done){
+            var destDir = path.join(simpleTest, "unpublishedEntry");
+            wrench.copyDirRecursive(unpublishedTest, destDir, function(){
+                testDrog.entries(function(entries){
+                    entries.length.should.equal(2);
+                    done();
+                });
+            });
+        })
     });
 });
