@@ -8,6 +8,7 @@
     "nodeunit" : "*",
     "should" : "*",
     "node-markdown" : "*",
-    "wrench" : "*"
+    "wrench" : "*",
+    "fs-watch-tree" : "*"
   }
 }
